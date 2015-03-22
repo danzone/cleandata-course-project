@@ -58,3 +58,49 @@ dataset <- cbind(subjectData,activityData)
 dataset <- cbind(dataset,featuresData)
 message("Generating dataset...Done")
 
+## Extract measurements of mean and standard deviation 
+message("Extracting measurements of mean and standard deviation...")
+subsetFeatureNames <- featureDataNames$V2[grep("mean\\(\\)|std\\(\\)",featureDataNames$V2)]
+subsetNames <- c("subject","activity",as.character(subsetFeatureNames))
+tidySubset <- subset(dataset,select=subsetNames)
+message("Extracting measurements of mean and standard deviation...Done")
+
+
+## Set descriptive names for activities
+message("Setting descriptive names for activities...")
+activityLabels <- read.table(file.path(ucihar_dataset_path,"activity_labels.txt"),header=FALSE)
+
+tidySubset <- merge(activityLabels,tidySubset,by.x="V1",by.y="activity")
+
+## Remove raw activities
+tidySubset <- tidySubset[,!(names(tidySubset) %in% c("V1"))]
+names(tidySubset)[names(tidySubset) == "V2"] <- "activity"
+
+## Set subject in first column
+tmpNames <- names(tidySubset)[!(names(tidySubset) %in% c("subject"))]
+tidySubset <- tidySubset[,c("subject",as.character(tmpNames))]
+
+message("Setting descriptive names for activities...Done")
+
+## Set descriptive names for variables
+message("Setting descriptive names for variables...")
+names(tidySubset) <- gsub("^t","time",names(tidySubset))
+names(tidySubset) <- gsub("^f","frequency",names(tidySubset))
+names(tidySubset) <- gsub("Acc","Accelerometer",names(tidySubset))
+names(tidySubset) <- gsub("Gyro","Gyroscope",names(tidySubset))
+names(tidySubset) <- gsub("Mag","Magnitude",names(tidySubset))
+names(tidySubset) <- gsub("BodyBody","Body",names(tidySubset))
+message("Setting descriptive names for variables...Done")
+
+
+message("Creating second independent dataset and storing it in tidydata.txt file...")
+## Create a second independent dataset with the mean of each variable
+## aggregated by subject and activity
+library(plyr)
+
+
+tidySubset2 <- aggregate(. ~subject + activity,tidySubset,mean)
+
+write.table(tidySubset2, file = "./data/tidydata.txt",row.names=FALSE)
+message("Creating second independent dataset and storing it in tidydata.txt file...Done")
+
