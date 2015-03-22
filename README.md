@@ -1,5 +1,5 @@
 # Getting and Cleaning Data - Course Project
-run_analysis.R script requires plyr library, so you need to install it:
+`run_analysis.R` script requires `plyr` library, so before launch the script, you need to install it:
 
 `>install.packages("plyr")`
 
@@ -7,7 +7,7 @@ After installing plyr, you can start the script simply invokoing in R shell:
 
 `> source("run_analysis.R")`
 
-The script run_analysis.R performs following steps:
+The script `run_analysis.R` performs following steps:
 1. it creates directory "data"
 2. it downloads raw data stored in a compressed file
 3. uncompress downloaded file
