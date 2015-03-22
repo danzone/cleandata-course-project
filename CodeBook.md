@@ -3,7 +3,7 @@
 ## Raw data set
 Raw data are obtained from UCI Machine Learning Repository in a [compressed file](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip). In this page you
 can have several information about data: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
-The [compressed file](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) contains also extensive description about data: see README.txt file 
+The [compressed file](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip) contains also extensive description about data: see `README.txt` file 
 
 ## Data processing
 
